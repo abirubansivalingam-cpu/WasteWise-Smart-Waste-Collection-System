@@ -1,0 +1,2 @@
+{% extends "base_auth.html" %}{% block title %}Sign in{% endblock %}{% block auth_title %}Welcome back{% endblock %}{% block auth_sub %}Sign in to manage cleaner communities.{% endblock %}
+{% block auth_form %}<form method="post">{% csrf_token %}{{ form.as_p }}<button class="auth-btn">Sign in to WasteWise →</button></form><p class="auth-switch">New to WasteWise? <a href="{% url 'register' %}">Create an account</a></p>{% endblock %}

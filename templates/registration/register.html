@@ -1,0 +1,2 @@
+{% extends "base_auth.html" %}{% block title %}Create account{% endblock %}{% block auth_title %}Join WasteWise{% endblock %}{% block auth_sub %}Create an account to request and track pickups.{% endblock %}
+{% block auth_form %}<form method="post">{% csrf_token %}{{ form.as_p }}<button class="auth-btn">Create account →</button></form><p class="auth-switch">Already registered? <a href="{% url 'login' %}">Sign in</a></p>{% endblock %}

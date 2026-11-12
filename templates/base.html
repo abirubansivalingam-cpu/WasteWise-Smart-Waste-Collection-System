@@ -1,0 +1,19 @@
+{% load static %}
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{% block title %}WasteWise{% endblock %} | Smart Waste Management</title>
+<link rel="stylesheet" href="{% static 'css/app.css' %}"><script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet"></head>
+<body><div class="app-shell">
+<aside class="sidebar" id="sidebar"><a class="brand" href="{% url 'dashboard' %}"><span class="brand-mark">W</span><span>Waste<span class="brand-light">Wise</span><small>SMART CITY OPERATIONS</small></span></a>
+<div class="side-label">WORKSPACE</div><nav>
+<a href="{% url 'dashboard' %}" class="{% if request.resolver_match.url_name == 'dashboard' %}active{% endif %}"><b>▦</b> Overview</a>
+<a href="{% url 'request_list' %}"><b>♧</b> Collection requests</a><a href="{% url 'request_create' %}"><b>＋</b> New pickup request</a>
+<a href="{% url 'schedule' %}"><b>▣</b> Pickup schedule</a><div class="side-label">MANAGEMENT</div>
+<a href="{% url 'staff_list' %}"><b>♙</b> Collection staff</a><a href="{% url 'vehicle_list' %}"><b>▰</b> Fleet & vehicles</a>
+<a href="{% url 'complaint_list' %}"><b>◎</b> Complaints</a><b>◎</b> Complaints</a><a href="{% url 'reports' %}"><b>▤</b> Reports & insights</a></nav>
+<div class="sidebar-bottom"><div class="eco-card"><span>♻</span><strong>Make every pickup count.</strong><p>Cleaner streets start with smarter collection.</p></div>
+<a href="{% url 'profile' %}" class="profile-mini"><span class="avatar">{{ request.user.username|first|upper }}</span><span><strong>{{ request.user.username }}</strong><small>{% if request.user.is_staff %}Administrator{% else %}Community member{% endif %}</small></span></a>
+<form method="post" action="{% url 'logout' %}">{% csrf_token %}<button class="logout">↗ Sign out</button></form></div></aside>
+<main class="main"><header class="topbar"><button class="menu-btn" onclick="document.getElementById('sidebar').classList.toggle('open')">☰</button><div><span class="eyebrow">WASTEWISE / OPERATIONS</span><div class="page-heading">{% block heading %}Overview{% endblock %}</div></div><div class="top-actions"><span class="live"><i></i> System operational</span><span class="top-avatar">{{ request.user.username|first|upper }}</span></div></header>
+<div class="content">{% if messages %}{% for message in messages %}<div class="notice">{{ message }}</div>{% endfor %}{% endif %}{% block content %}{% endblock %}</div>
+<footer>© 2026 WasteWise <span>Building cleaner communities, one collection at a time.</span></footer></main></div><script src="{% static 'js/app.js' %}"></script>{% block scripts %}{% endblock %}</body></html>
